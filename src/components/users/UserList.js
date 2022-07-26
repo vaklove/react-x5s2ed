@@ -112,6 +112,7 @@ function UserList() {
           <input placeholder="Name" name="name" />
           <input placeholder="Email" name="email" />
           <button onSubmit={handleOnEditSubmit}>Save</button>
+          <Button onClick={handleEdit}>Cancel</Button>
         </form>
       ) : (
         <Table responsive>
@@ -119,6 +120,7 @@ function UserList() {
             <tr>
               <th>Name</th>
               <th>Email</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
