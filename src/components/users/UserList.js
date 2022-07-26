@@ -6,9 +6,15 @@ import Button from 'react-bootstrap/Button';
 function UserList() {
   const [users, setUsers] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
+  const [editUser, setEditUser] = useState(undefined);
 
   const handleEdit = () => {
     setIsEdit(!isEdit);
+  };
+
+  const handleUserEdit = (id) => {
+    setIsEdit(!isEdit);
+    setEditUser(users.find((u) => u.id === id));
   };
 
   useEffect(() => {
@@ -47,8 +53,10 @@ function UserList() {
   };
   const handleOnEditSubmit = (evt) => {
     evt.preventDefault();
-
-    onEdit(id, evt.target.name.value, evt.target.email.value);
+    const user = users.find((u) => u.id == evt.target.id.value);
+    user.name = evt.target.name.value;
+    user.email = evt.target.email.value;
+    onEdit(evt.target.id.value, evt.target.name.value, evt.target.email.value);
     setIsEdit(!isEdit);
   };
 
@@ -107,10 +115,20 @@ function UserList() {
     <div>
       <h1>Users </h1>
       <AddUser onAdd={onAdd} />
-      {isEdit ? (
+      {isEdit && editUser ? (
         <form onSubmit={handleOnEditSubmit}>
-          <input placeholder="Name" name="name" />
-          <input placeholder="Email" name="email" />
+          <input
+            placeholder="Id"
+            name="id"
+            value={editUser.id}
+            style={{ display: 'none' }}
+          />
+          <input placeholder="Name" name="name" defaultValue={editUser.name} />
+          <input
+            placeholder="Email"
+            name="email"
+            defaultValue={editUser.email}
+          />
           <button onSubmit={handleOnEditSubmit}>Save</button>
           <Button onClick={handleEdit}>Cancel</Button>
         </form>
@@ -130,7 +148,9 @@ function UserList() {
                   <td>{user.name}</td>
                   <td>{user.email}</td>
                   <td>
-                    <Button onClick={handleEdit}>Edit</Button>
+                    <Button onClick={() => handleUserEdit(user.id)}>
+                      Edit
+                    </Button>
                     <Button variant="danger" onClick={() => onDelete(user.id)}>
                       Delete
                     </Button>
