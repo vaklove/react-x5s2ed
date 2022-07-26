@@ -86,7 +86,23 @@ function UserList() {
       .catch((error) => console.log(error));
   };
 
-  const onDelete = async (id) => {};
+  const onDelete = async (id) => {
+    await fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
+      method: 'DELETE',
+    })
+      .then((response) => {
+        if (response.status !== 200) {
+          return;
+        } else {
+          setUsers(
+            users.filter((user) => {
+              return user.id !== id;
+            })
+          );
+        }
+      })
+      .catch((error) => console.log(error));
+  };
   return (
     <div>
       <h1>Users </h1>
@@ -113,7 +129,9 @@ function UserList() {
                   <td>{user.email}</td>
                   <td>
                     <Button onClick={handleEdit}>Edit</Button>
-                    <Button variant="danger">Delete</Button>
+                    <Button variant="danger" onClick={() => onDelete(user.id)}>
+                      Delete
+                    </Button>
                   </td>
                 </tr>
               ))}

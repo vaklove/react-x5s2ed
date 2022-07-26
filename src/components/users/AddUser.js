@@ -14,9 +14,9 @@ function AddUser({ onAdd }) {
         <input type="text" name="name" placeholder="Name" />
         <input type="email" name="email" placeholder="Email" />
 
-        <Button variant="primary" onSubmit={handleOnSubmit}>
+        <button variant="primary" onSubmit={handleOnSubmit}>
           Add User
-        </Button>
+        </button>
       </form>
     </div>
   );
