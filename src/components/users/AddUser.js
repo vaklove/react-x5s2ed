@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Button from 'react-bootstrap/Button';
 
 function AddUser({ onAdd }) {
   const handleOnSubmit = (evt) => {
@@ -13,7 +14,9 @@ function AddUser({ onAdd }) {
         <input type="text" name="name" placeholder="Name" />
         <input type="email" name="email" placeholder="Email" />
 
-        <button onSubmit={handleOnSubmit}>Add User</button>
+        <Button variant="primary" onSubmit={handleOnSubmit}>
+          Add User
+        </Button>
       </form>
     </div>
   );
