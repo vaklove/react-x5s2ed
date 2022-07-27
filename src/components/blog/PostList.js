@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Button from 'react-bootstrap/Button';
 
 export default function PostList() {
   const [posts, setPosts] = useState([]);
@@ -23,6 +24,12 @@ export default function PostList() {
               <div>
                 <p className="title">{post.title}</p>
                 <p className="body">{post.body}</p>
+              </div>
+              <div>
+                {/* <Button onClick={() => handleUserEdit(user.id)}>Edit</Button>
+                <Button variant="danger" onClick={() => onDelete(user.id)}>
+                  Delete
+                </Button> */}
               </div>
             </li>
           ))}

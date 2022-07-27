@@ -7,6 +7,8 @@ function UserList() {
   const [users, setUsers] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const [editUser, setEditUser] = useState(undefined);
+  const [searchInput, setSearchInput] = useState('');
+  const [filteredResults, setFilteredResults] = useState([]);
 
   const handleEdit = () => {
     setIsEdit(!isEdit);
@@ -111,10 +113,34 @@ function UserList() {
       })
       .catch((error) => console.log(error));
   };
+
+  const searchItems = (searchValue) => {
+    setSearchInput(searchValue);
+    if (searchInput !== '') {
+      const filteredData = users.filter((item) => {
+        return Object.values(item)
+          .join('')
+          .toLowerCase()
+          .includes(searchInput.toLowerCase());
+      });
+      setFilteredResults(filteredData);
+    } else {
+      setFilteredResults(users);
+    }
+  };
+
   return (
     <div>
       <h1>Users </h1>
       <AddUser onAdd={onAdd} />
+      <br />
+      <hr />
+      <input
+        icon="search"
+        placeholder="Search user..."
+        onChange={(e) => searchItems(e.target.value)}
+      />
+      <br />
       {isEdit && editUser ? (
         <form onSubmit={handleOnEditSubmit}>
           <input
@@ -142,6 +168,9 @@ function UserList() {
             </tr>
           </thead>
           <tbody>
+
+          
+
             {users &&
               users.map((user) => (
                 <tr key={user.id}>
