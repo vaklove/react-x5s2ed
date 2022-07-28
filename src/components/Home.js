@@ -11,7 +11,7 @@ import PostList from './blog/PostList';
 const Home = () => (
   <Home>
     <Switch>
-      <Route exact path="/post" component={PostList} />
+      <Route exact path="/posts" component={PostList} />
       <Route exact path="/users" component={UserList} />
     </Switch>
   </Home>

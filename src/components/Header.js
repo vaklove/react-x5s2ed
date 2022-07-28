@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Header = () => {
   return (
@@ -8,14 +7,10 @@ const Header = () => {
       <nav>
         <ul>
           <li>
-            <Link to="/posts" className="nav-link">
-              Posts
-            </Link>
+            <Link to="/posts">Posts</Link>
           </li>
           <li>
-            <Link to="/users" className="nav-link">
-              Users
-            </Link>
+            <Link to="/users">Users</Link>
           </li>
         </ul>
       </nav>
