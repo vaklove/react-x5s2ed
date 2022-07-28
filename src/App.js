@@ -1,16 +1,16 @@
 import React from 'react';
 import './style.css';
-import UserList from './components/users/UserList';
-import PostList from './components/blog/PostList';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Header from './components/Header';
+import Home from './components/Home';
 
 export default function App() {
   return (
     <div>
-      <h1>Hello StackBlitz!</h1>
-      <p>Start editing to see some magic happen :)</p>
-      <UserList />
-      <PostList />
+      <Header />
+      <Home />
     </div>
   );
 }
