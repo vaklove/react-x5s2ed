@@ -37,16 +37,19 @@ const AddPost = () => {
     <>
       <section>
         <h2>Add a New Post</h2>
+
         <form className="row">
+          <br />
           <label htmlFor="postTitle">Post Title:</label>
           <input
             type="text"
             id="postTitle"
             name="postTitle"
-            value={title}
-            onChange={onTitleChanged}
+            defaultValue={title}
+            onChange={(e) => setTitle(e.target.value)}
             placeholder="What's on your mind?"
           />
+          <br />
           <label htmlFor="postAuthor">Author:</label>
           <select id="postAuthor" onChange={onAuthorChanged}>
             <option value=""> </option>
