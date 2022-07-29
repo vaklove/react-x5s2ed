@@ -15,7 +15,7 @@ export default function PostList() {
       .then((data) => setPosts(data))
       .catch((er) => console.log(er));
   };
-
+ 
   return (
     <div className="App">
       <div>

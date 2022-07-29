@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 
 const AddPost = () => {
-  const [users, setUsers] = useState('');
+  const [users, setUsers] = useState([]);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [userid, setUserId] = useState('');
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    fetchUsers();
+  }, []);
   const savePost = () => {
     fetch('https://jsonplaceholder.typicode.com/posts', {
       method: 'POST',
@@ -33,6 +35,28 @@ const AddPost = () => {
   const onContentChanged = (evt) => {
     setContent(evt.target.value);
   };
+
+  const fetchUsers = () => {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then((res) => res.json())
+      .then((data) => setUsers(data))
+      .catch((er) => console.log(er));
+  };
+
+  // const userOptions = () => {
+  //   console.log('chi');
+  //   fetchUsers();
+  //   users.map((user) => (
+  //     <option key={user.id} value={user.id}>
+  //       {user.name}
+  //     </option>
+  //   ));
+  // };
+
+  const userOptions = () => {
+    fetchUsers();
+  };
+
   return (
     <>
       <section>
@@ -46,16 +70,22 @@ const AddPost = () => {
             id="postTitle"
             name="postTitle"
             defaultValue={title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={onTitleChanged}
             placeholder="What's on your mind?"
           />
           <br />
           <label htmlFor="postAuthor">Author:</label>
-          <select id="postAuthor" onChange={onAuthorChanged}>
+          <select
+            id="postAuthor"
+            defaultValue={userid}
+            onChange={onAuthorChanged}
+          >
             <option value=""> </option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
+            {users.map((user) => (
+              <option key={user.id} value={user.id}>
+                {user.name}
+              </option>
+            ))}
           </select>
           <label htmlFor="postContent">Content:</label>
           <textarea
